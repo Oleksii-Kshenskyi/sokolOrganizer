@@ -13,15 +13,12 @@ namespace Bubble.ViewModels.Base
     internal abstract class ViewModel : INotifyPropertyChanged
     {
        public event PropertyChangedEventHandler PropertyChanged;
-        
 
-        //Передаём имя свойства и генерируем внутри событие. Атрибут для компилятора. 
-       protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
+       protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        //Задача метода обновлять значение свойства, для которого определено поле в котором это свойство хранит свои данные.
         protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string PropertyName = null)
         {
             if(Equals(field, value)) return false;
