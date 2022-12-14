@@ -24,5 +24,15 @@ namespace Bubble
         {
             InitializeComponent();
         }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void buttonClose_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
