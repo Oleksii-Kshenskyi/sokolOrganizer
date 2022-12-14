@@ -5,36 +5,41 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Bubble"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   
+    xmlns:vm="clr-namespace:Bubble.ViewModels"
     Title="MainWindow"
     Width="500"
     Height="500"
-    mc:Ignorable="d"
     AllowsTransparency="True"
     Background="Transparent"
-    MouseLeftButtonDown="Window_MouseLeftButtonDown"
-    WindowStyle="None">
-    <Border CornerRadius="250"
-            BorderThickness="5"
-            BorderBrush="#FF7A7DF4">
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+    <Border
+        BorderBrush="#FF7A7DF4"
+        BorderThickness="5"
+        CornerRadius="250">
         <Border.Background>
             <RadialGradientBrush>
-                <GradientStop Color="#FFA2C2F4"/>
-                <GradientStop Color="#FF0E6AFC" Offset="1"/>
-                <GradientStop Color="#FF598FE2" Offset="0.507"/>
+                <GradientStop Color="#FFA2C2F4" />
+                <GradientStop Offset="1" Color="#FF0E6AFC" />
+                <GradientStop Offset="0.507" Color="#FF598FE2" />
             </RadialGradientBrush>
         </Border.Background>
         <Grid>
-            <Button Content="X"
-                    Height="25"
-                    Name="buttonClose"
-                    Width="25"
-                    Click="buttonClose_Click" Margin="465,10,0,455"
-                    />
+            <Button
+                Name="buttonClose"
+                Width="25"
+                Height="25"
+                Margin="465,10,0,455"
+                Command="{Binding CloseApplicationCommand}"
+                Content="X" />
         </Grid>
 
 
     </Border>
+
 
 
 </Window>
