@@ -18,20 +18,22 @@ namespace Bubble.ViewModels
         public ICommand CloseApplicationCommand { get; }
 
         private bool CanCloseApplicationCommandExecute(object parameter) => true;
-        private void OnCloseApplicationCommandExecutd(object parameter) 
-        {
-            Application.Current.Shutdown();
-        }
+        private void OnCloseApplicationCommandExecuted(object parameter) => Application.Current.Shutdown();
+        #endregion
+        #region DragMoveCommand
+        public ICommand DragMoveCommand { get; }
+
+        private bool CanDragMoveCommandExecute(object parameter) => true;
+        private void OnDragMoveCommandExecuted(object parameter) => Window.DragMove();
 
         #endregion
-
         #endregion
         public MainWindowViewModel()
         {
             #region Command
 
-            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecutd, CanCloseApplicationCommandExecute);
-            
+            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            DragMoveCommand = new LambdaCommand(OnDragMoveCommandExecuted, CanDragMoveCommandExecute);
             #endregion
 
         }
