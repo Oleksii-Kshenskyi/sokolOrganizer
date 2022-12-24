@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace SokolTextGame
 {
-    internal class World
+    public class World
     {
         private Dictionary<string, ICommand> commands = new();
         private void CommandDictionary()
