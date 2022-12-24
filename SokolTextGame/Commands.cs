@@ -8,16 +8,14 @@ namespace SokolTextGame
 {
     internal interface ICommand
     {
-        void Execute(string[] words, World world);
-                
+        void Execute(string[] words, World world);                
     }
     public class Echo : ICommand
     {
         void ICommand.Execute(string[] words, World world)
         {
-            string text = string.Join(" ", words).Substring(5);
+            string text = string.Join(" ", words.Skip(1));
             Console.WriteLine(text);
-
         }
     }
 
@@ -34,7 +32,7 @@ namespace SokolTextGame
     {
         void ICommand.Execute(string[] words, World world)
         {
-            Console.WriteLine("I'm sorry, but there is no such team. =)");
+            Console.WriteLine("I'm sorry, but there is no such command. =) ");
         }
     }
 }

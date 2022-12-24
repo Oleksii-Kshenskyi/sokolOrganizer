@@ -14,7 +14,6 @@ namespace SokolTextGame
         {
             commands["echo"] = new Echo();
             commands["exit"] = new Exit();
-
         }
 
 
