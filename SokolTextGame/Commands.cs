@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SokolTextGame
 {
-    internal interface ICommand
+    public interface ICommand
     {
-        void Execute(string[] words, World world);                
+        public void Execute(string[] words, World world);
     }
     public class Echo : ICommand
     {
-        void ICommand.Execute(string[] words, World world)
+        public void Execute(string[] words, World world)
         {
             string text = string.Join(" ", words.Skip(1));
             Console.WriteLine(text);
@@ -21,7 +21,7 @@ namespace SokolTextGame
 
     public class Exit : ICommand
     {
-        void ICommand.Execute(string[] words, World world)
+        public void Execute(string[] words, World world)
         {
             Console.WriteLine("See you later..");
             Environment.Exit(0);
@@ -30,7 +30,7 @@ namespace SokolTextGame
 
     public class Unknown : ICommand
     {
-        void ICommand.Execute(string[] words, World world)
+        public void Execute(string[] words, World world)
         {
             Console.WriteLine("I'm sorry, but there is no such command. =) ");
         }
