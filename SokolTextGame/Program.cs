@@ -1,6 +1,6 @@
 ﻿using SokolTextGame;
 
-World? world = new World();
+World world = new World();
 
 while (true)
 {
