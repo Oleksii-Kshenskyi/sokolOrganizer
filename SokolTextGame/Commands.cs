@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SokolTextGame;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +35,16 @@ namespace SokolTextGame
         public void Execute(string[] words, World world)
         {
             Console.WriteLine("I'm sorry, but there is no such command. =) ");
+        }
+    }
+
+    public class CreatePlayer : ICommand
+    {
+        public void Execute(string[] words, World world)
+        {
+            if (words[0].Equals("warrior")) world.player = new Warrior();
+            else if (words[0].Equals("rogue")) world.player = new Rogue();
+            else if (words[0].Equals("wizard")) world.player = new Wizard();            
         }
     }
 }

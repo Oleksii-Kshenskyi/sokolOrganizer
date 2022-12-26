@@ -9,11 +9,12 @@ namespace SokolTextGame
 {
     public class World
     {
+        public IPlayer? player;
         private Dictionary<string, ICommand> commands = new();
         private void CommandDictionary()
         {
             commands["echo"] = new Echo();
-            commands["exit"] = new Exit();
+            commands["exit"] = new Exit();            
         }
 
 
