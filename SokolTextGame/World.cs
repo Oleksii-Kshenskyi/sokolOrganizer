@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-
+﻿
 namespace SokolTextGame
 {
     public class World
@@ -26,7 +19,7 @@ namespace SokolTextGame
             locations["forest"] = new Forest();
         }
         public ILocation CurrentLocation()
-        {
+        { 
             return locations[player.CurrentLocation];
         }
 
@@ -46,7 +39,7 @@ namespace SokolTextGame
         {
             CommandDictionary();
             player = null;
-            LocationDictionary();            
+            LocationDictionary();
         }
     }
 }
