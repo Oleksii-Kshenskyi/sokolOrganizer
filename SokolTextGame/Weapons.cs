@@ -13,6 +13,6 @@ namespace SokolTextGame
 
     public class BareFists : IWeapon
     {
-        public string Descriprion { get; } = "Bare fists. What else could it be?";
+        public string Descriprion { get; } = "Bare fists. What else could it be?\n";
     }
 }

@@ -14,7 +14,9 @@ namespace SokolTextGame
         private void CommandDictionary()
         {
             commands["echo"] = new Echo();
-            commands["exit"] = new Exit();            
+            commands["exit"] = new Exit();
+            commands["who"] = new WhoAmI();
+            commands["look"] = new Look();
         }
 
 
@@ -32,6 +34,8 @@ namespace SokolTextGame
         public World()
         {
             CommandDictionary();
+            player = null;
+            
         }
     }
 }
