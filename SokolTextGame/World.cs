@@ -18,7 +18,7 @@
             locations["forest"] = new Forest();
         }
         public ILocation CurrentLocation()
-        { 
+        {
             return locations[player.CurrentLocation];
         }
 

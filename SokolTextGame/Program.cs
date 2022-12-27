@@ -1,5 +1,4 @@
 ﻿using SokolTextGame;
-using System.Drawing;
 
 World? world = null;
 while (true)
