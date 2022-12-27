@@ -1,5 +1,4 @@
-﻿
-namespace SokolTextGame
+﻿namespace SokolTextGame
 {
     public class World
     {
@@ -22,7 +21,6 @@ namespace SokolTextGame
         { 
             return locations[player.CurrentLocation];
         }
-
 
         public void ExecuteCommand(string command)
         {

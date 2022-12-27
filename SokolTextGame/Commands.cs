@@ -1,5 +1,4 @@
-﻿
-namespace SokolTextGame
+﻿namespace SokolTextGame
 {
     public interface ICommand
     {
@@ -27,7 +26,7 @@ namespace SokolTextGame
         public void Execute(string[] words, World world)
         {
             if (string.Join(" ", words) == "who") Console.Write("who, who? =)\n");
-            else if (string.Join(" ", words) == "who am i") Console.Write( world?.player?.Description);
+            else if (string.Join(" ", words) == "who am i") Console.Write(world?.player?.Description);
             else Console.Write("I know the command \"who am i\"\n");
         }
     }
@@ -36,6 +35,7 @@ namespace SokolTextGame
         public void Execute(string[] words, World world)
         {
             if (string.Join(" ", words) == "look") Console.Write("Look... What's next? You can look at your weapon\n");
+            else if (string.Join(" ", words) == "look at") Console.Write("Look at... You can look at... But this isn't the kind of game where we're going to look \"at\" =)\r\nSo let's be more specific.\n");
             else if (string.Join(" ", words) == "look at my weapon") Console.Write(world?.player?.Weapon.Descriprion);
             else Console.Write("I know the command \"look at my weapon\"\n");
         }
@@ -65,7 +65,6 @@ namespace SokolTextGame
             if (words[0].Equals("warrior")) world.player = new Warrior(new BareFists());
             else if (words[0].Equals("rogue")) world.player = new Rogue(new BareFists());
             else if (words[0].Equals("wizard")) world.player = new Wizard(new BareFists());
-            else throw new Exception("CreatePlayer.Execute(): unknown player type?!");
         }
     }
 }

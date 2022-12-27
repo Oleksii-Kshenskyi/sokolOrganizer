@@ -17,14 +17,14 @@
         public Warrior(IWeapon weapon)
         {
             Weapon = weapon;
-        }        
+        }
     }
     public class Rogue : IPlayer
     {
         public string Description { get; } = "You are fast, nimble, invisible to most people around you.\n" +
             "You like silence and control over the situation.\n" +
             "Conqueror of women's hearts and purses.\n";
-        public IWeapon Weapon { get; set;}
+        public IWeapon Weapon { get; set; }
         public string CurrentLocation { get; set; } = "forest";
         public Rogue(IWeapon weapon)
         {
@@ -36,7 +36,7 @@
         public string Description { get; } = "You are a wizard of high intelligence and intuition.\n" +
             "But to use magic, you need a magic book.\n" +
             "Without it, you can only show a trick with disappearance of a thumb on your hand.\n";
-        public IWeapon Weapon { get; set;}
+        public IWeapon Weapon { get; set; }
         public string CurrentLocation { get; set; } = "forest";
         public Wizard(IWeapon weapon)
         {
