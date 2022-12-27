@@ -47,6 +47,15 @@ namespace SokolTextGame
             else Console.Write("I know the command \"look at my weapon\"\n");
         }
     }
+    public class WhereAmI : ICommand
+    {
+        public void Execute(string[] words, World world)
+        {
+            if (words.Length == 1 && string.Join(" ", words) == "where") Console.Write("Where? Where what? Or Who where?\n");
+            else if (words.Length == 3 && string.Join(" ", words) == "where am i") Console.Write(world.CurrentLocation().Description);
+            else Console.Write("I know the command \"where am i\"\n");
+        }
+    }
 
     public class Unknown : ICommand
     {

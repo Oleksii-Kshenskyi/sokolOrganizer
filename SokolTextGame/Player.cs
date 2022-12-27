@@ -10,6 +10,7 @@ namespace SokolTextGame
     {
         public string Description { get; }
         public IWeapon Weapon { get; set; }
+        public string CurrentLocation { get; set; }
     }
     public class Warrior : IPlayer
     {
@@ -18,9 +19,10 @@ namespace SokolTextGame
             "You're ready to knock your opponent's teeth out at any moment,\n" +
             "and maybe even break a bone or two.\n";
         public IWeapon Weapon { get; set; }
+        public string CurrentLocation { get; set; } = "forest";
+
         public Warrior(IWeapon weapon)
-        {
-            
+        {            
             Weapon = weapon;
         }        
     }
@@ -30,9 +32,9 @@ namespace SokolTextGame
             "You like silence and control over the situation.\n" +
             "Conqueror of women's hearts and purses.\n";
         public IWeapon Weapon { get; set;}
+        public string CurrentLocation { get; set; } = "forest";
         public Rogue(IWeapon weapon)
-        {
-            
+        {            
             Weapon = weapon;
         }
     }
@@ -42,9 +44,9 @@ namespace SokolTextGame
             "But to use magic, you need a magic book.\n" +
             "Without it, you can only show a trick with disappearance of a thumb on your hand.\n";
         public IWeapon Weapon { get; set;}
+        public string CurrentLocation { get; set; } = "forest";
         public Wizard(IWeapon weapon)
-        {
-            
+        {            
             Weapon = weapon;
         }   
     }

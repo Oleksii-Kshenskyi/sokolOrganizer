@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,6 +18,16 @@ namespace SokolTextGame
             commands["exit"] = new Exit();
             commands["who"] = new WhoAmI();
             commands["look"] = new Look();
+            commands["where"] = new WhereAmI();
+        }
+        private Dictionary<string, ILocation> locations = new();
+        private void LocationDictionary()
+        {
+            locations["forest"] = new Forest();
+        }
+        public ILocation CurrentLocation()
+        {
+            return locations[player.CurrentLocation];
         }
 
 
@@ -35,7 +46,7 @@ namespace SokolTextGame
         {
             CommandDictionary();
             player = null;
-            
+            LocationDictionary();            
         }
     }
 }
