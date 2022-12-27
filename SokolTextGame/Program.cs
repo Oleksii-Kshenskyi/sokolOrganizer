@@ -10,7 +10,7 @@ while (true)
 
     if (userInput != null)
     {
-        string[] classes = { "warrior", "rogue", "wizzard" };
+        string[] classes = { "warrior", "rogue", "wizard" };
         string[] words = userInput.ToLower().Trim().Split();
         if (words.Length != 1) continue;
         else if (classes.Contains(words[0]))
