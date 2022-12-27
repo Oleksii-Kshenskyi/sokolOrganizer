@@ -14,9 +14,8 @@
             "and maybe even break a bone or two.\n";
         public IWeapon Weapon { get; set; }
         public string CurrentLocation { get; set; } = "forest";
-
         public Warrior(IWeapon weapon)
-        {            
+        {
             Weapon = weapon;
         }        
     }
@@ -28,7 +27,7 @@
         public IWeapon Weapon { get; set;}
         public string CurrentLocation { get; set; } = "forest";
         public Rogue(IWeapon weapon)
-        {            
+        {
             Weapon = weapon;
         }
     }
@@ -40,8 +39,8 @@
         public IWeapon Weapon { get; set;}
         public string CurrentLocation { get; set; } = "forest";
         public Wizard(IWeapon weapon)
-        {            
+        {
             Weapon = weapon;
-        }   
+        }
     }
 }
