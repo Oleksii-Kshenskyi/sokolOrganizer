@@ -42,9 +42,9 @@ namespace SokolTextGame
     {
         public void Execute(string[] words, World world)
         {
-            if (words[0].Equals("warrior")) world.player = new Warrior();
-            else if (words[0].Equals("rogue")) world.player = new Rogue();
-            else if (words[0].Equals("wizard")) world.player = new Wizard();            
+            if (words[0].Equals("warrior")) world.player = new Warrior(new BareFists());
+            else if (words[0].Equals("rogue")) world.player = new Rogue(new BareFists());
+            else if (words[0].Equals("wizard")) world.player = new Wizard(new BareFists());            
         }
     }
 }
