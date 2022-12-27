@@ -35,7 +35,7 @@
         public void Execute(string[] words, World world)
         {
             if (string.Join(" ", words) == "look") Console.Write("Look... What's next? You can look at your weapon\n");
-            else if (string.Join(" ", words) == "look at") Console.Write("Look at... You can look at... But this isn't the kind of game where we're going to look \"at\" =)\r\nSo let's be more specific.\n");
+            else if (string.Join(" ", words) == "look at") Console.Write("Look at... what?\n");
             else if (string.Join(" ", words) == "look at my weapon") Console.Write(world?.player?.Weapon.Descriprion);
             else Console.Write("I know the command \"look at my weapon\"\n");
         }
