@@ -11,12 +11,17 @@
             commands["who"] = new WhoAmI();
             commands["look"] = new Look();
             commands["where"] = new WhereAmI();
+            commands["go"] = new GoTo();
         }
         private Dictionary<string, ILocation> locations = new();
         private void LocationDictionary()
         {
             locations["forest"] = new Forest();
             locations["square"] = new Square();
+        }
+        public ILocation LocationName(string name)
+        {
+            return locations[name];
         }
         public ILocation CurrentLocation()
         {

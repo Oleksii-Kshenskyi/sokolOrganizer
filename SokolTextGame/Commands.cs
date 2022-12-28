@@ -49,6 +49,40 @@
             else Console.Write("I know the command \"where am i\"\n");
         }
     }
+    public class GoTo : ICommand
+    {
+        public void Execute(string[] words, World world)
+        {
+            if (words.Length == 3)
+            {
+                if (string.Join(" ", words.Take(2)) == "go to")
+                {
+                    string locationName = string.Join(" ", words.Skip(2));
+                    if (world.player.CurrentLocation == locationName) Console.WriteLine($"I am already in a location {world.player.CurrentLocation}");
+                    else
+                    {
+                        world.player.CurrentLocation = locationName;
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"Current location: {locationName.ToUpper()}");
+                        Console.ResetColor();
+                    }
+                }
+            }
+            else if (string.Join(" ", words) == "go")
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Where are we going?");
+                Console.ResetColor();
+            }
+            else if (string.Join(" ", words) == "go to")
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Not bad, not bad.\n" +
+                    "But you have to give the name of the place you want to go to.");
+                Console.ResetColor();
+            }
+        }
+    }
 
     public class Unknown : ICommand
     {
