@@ -22,10 +22,10 @@ while (true)
         }
         else
         {
-            Console.ForegroundColor= ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("You must write: Warrior or Rogue or Wizard\n\n");
             Console.ResetColor();
-        }            
+        }
     }
 }
 

@@ -17,6 +17,7 @@
     {
         public void Execute(string[] words, World world)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("See you later..");
             Environment.Exit(0);
         }
@@ -46,7 +47,14 @@
         {
             if (string.Join(" ", words) == "where") Console.Write("Where? Where what? Or where who?\n");
             else if (string.Join(" ", words) == "where am i") Console.Write(world.CurrentLocation().Description);
-            else Console.Write("I know the command \"where am i\"\n");
+            else if (string.Join(" ", words) == "where can i go")
+            {
+                string output = string.Join("", world.CurrentLocation().possibleLocation);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Possible location : {output}");
+                Console.ResetColor();
+            }
+            else Console.Write("I know the command \"where am i\" and \"where can i go\"\n");
         }
     }
     public class GoTo : ICommand
@@ -58,13 +66,22 @@
                 if (string.Join(" ", words.Take(2)) == "go to")
                 {
                     string locationName = string.Join(" ", words.Skip(2));
-                    if (world.player.CurrentLocation == locationName) Console.WriteLine($"I am already in a location {world.player.CurrentLocation}");
+                    if (world?.player?.CurrentLocation == locationName)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"I am already in a location {world.player.CurrentLocation}");
+                        Console.ResetColor();
+                    }
                     else
                     {
-                        world.player.CurrentLocation = locationName;
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"Current location: {locationName.ToUpper()}");
-                        Console.ResetColor();
+                        var aviableLocation = world.CurrentLocation();
+                        if (aviableLocation.possibleLocation.Contains(locationName))
+                        {
+                            world.player.CurrentLocation = locationName;
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine($"Current location: {locationName.ToUpper()}");
+                            Console.ResetColor();
+                        }
                     }
                 }
             }
@@ -88,7 +105,9 @@
     {
         public void Execute(string[] words, World world)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("I'm sorry, but there is no such command. =) ");
+            Console.ResetColor();
         }
     }
 

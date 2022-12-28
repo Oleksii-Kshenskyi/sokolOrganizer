@@ -19,10 +19,6 @@
             locations["forest"] = new Forest();
             locations["square"] = new Square();
         }
-        public ILocation LocationName(string name)
-        {
-            return locations[name];
-        }
         public ILocation CurrentLocation()
         {
             return locations[player.CurrentLocation];
