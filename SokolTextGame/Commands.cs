@@ -62,7 +62,7 @@
     {
         public void Execute(string[] words, World world)
         {
-            if (words.Length == 2 && string.Join(" ", words.Take(2)) == "go to")
+            if (words.Length > 2 && string.Join(" ", words.Take(2)) == "go to")
             {
                 string locationName = string.Join(" ", words.Skip(2));
                 if (world?.player?.CurrentLocation == locationName)
@@ -78,7 +78,13 @@
                     {
                         world.player.CurrentLocation = locationName;
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"Current location: {locationName.ToUpper()}");
+                        Console.WriteLine($"Current location: {locationName}");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"Can't go to location {locationName} because it doesn't exist");
                         Console.ResetColor();
                     }
                 }
@@ -94,6 +100,12 @@
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Not bad, not bad.\n" +
                     "But you have to give the name of the place you want to go to.");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("I need a <go to \"location name>\" command.");
                 Console.ResetColor();
             }
         }
