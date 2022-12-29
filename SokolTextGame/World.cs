@@ -12,6 +12,7 @@
             commands["look"] = new Look();
             commands["where"] = new Where();
             commands["go"] = new Go();
+            commands["talk"] = new Talk();
         }
         private Dictionary<string, ILocation> locations = new();
         private void LocationDictionary()

@@ -1,4 +1,6 @@
-﻿namespace SokolTextGame
+﻿using System.Globalization;
+
+namespace SokolTextGame
 {
     public interface ICommand
     {
@@ -56,7 +58,7 @@
                 }
                 else Console.WriteLine($"You see: {string.Join(" ", world.CurrentLocation()?.ObjectOnLocation?.Name)}");
             }
-            else Console.Write("I know the command \"look at my weapon\"\n");
+            else Console.Write("I know the command \"look at my weapon\" and \"look around\"\n");
         }
     }
     public class Where : ICommand
@@ -125,6 +127,33 @@
                 Console.WriteLine("I need a <go to \"location name>\" command.");
                 Console.ResetColor();
             }
+        }
+    }
+    public class Talk : ICommand
+    {
+        public void Execute(string[] words, World world)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            if (string.Join(" ", words) == "talk") Console.Write("blah blah blah blah\nThe command exists, but you have to say \"talk to\"\n");
+            else if (string.Join(" ", words) == "talk to")
+            {
+                if (string.IsNullOrEmpty(string.Join(" ", world.CurrentLocation().ObjectOnLocation)))
+                {
+                    Console.WriteLine("There are no interlocutors at the moment");
+                }
+                else Console.WriteLine("Talk to who?");
+            }
+            else if (string.Join(" ", words) == "talk to guard" &&
+                string.Join(" ", world.CurrentLocation()?.ObjectOnLocation?.Name) == words[2])
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Random rand = new Random();
+                int randomIdex = rand.Next(0, world.CurrentLocation().ObjectOnLocation.ObjectPharse.Length);
+                Console.WriteLine($"Guarg: {world.CurrentLocation().ObjectOnLocation.ObjectPharse[randomIdex]}");
+                Console.ResetColor();
+            }
+            else Console.WriteLine("There is no such thing here.");
+            Console.ResetColor();
         }
     }
 

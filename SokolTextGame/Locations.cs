@@ -5,7 +5,7 @@
         string Name { get; }
         string Description { get; }
         string[] possibleLocation { get; }
-        
+
         IObject? ObjectOnLocation { get; set; }
     }
     public class Forest : ILocation
