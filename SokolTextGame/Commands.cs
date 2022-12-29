@@ -53,7 +53,7 @@
                 }
                 else Console.WriteLine($"You see: {string.Join(" ", locObj.Name)}");
             }
-            else Console.Write("I know the command: \"look at my weapon\" \"look around\"\n");
+            else Console.Write("I know commands \"look at my weapon\", \"look around\" and \"look at <object>\"\n");
         }
     }
     public class Where : ICommand
