@@ -39,6 +39,15 @@
             if (string.Join(" ", words) == "look") Console.Write("Look... What's next? You can look at your weapon\n");
             else if (string.Join(" ", words) == "look at") Console.Write("Look at... what?\n");
             else if (string.Join(" ", words) == "look at my weapon") Console.Write(world?.player?.Weapon.Description);
+            else if (string.Join(" ", words) == "look at guard")
+            {
+                if (string.Join(" ", world.CurrentLocation()?.ObjectOnLocation?.Name) != null &&
+                    string.Join(" ", world.CurrentLocation()?.ObjectOnLocation?.Name) == words[2])
+                {
+                    Console.Write(world.CurrentLocation().ObjectOnLocation.Description);
+                }
+                else Console.WriteLine("I don't see this object on location");
+            }
             else Console.Write("I know the command \"look at my weapon\"\n");
         }
     }
@@ -50,7 +59,7 @@
             else if (string.Join(" ", words) == "where am i") Console.Write(world.CurrentLocation().Description);
             else if (string.Join(" ", words) == "where can i go")
             {
-                string output = string.Join("", world.CurrentLocation().possibleLocation);
+                string output = string.Join(" ", world.CurrentLocation().possibleLocation);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Possible location : {output}");
                 Console.ResetColor();

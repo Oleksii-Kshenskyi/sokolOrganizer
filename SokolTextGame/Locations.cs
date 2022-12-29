@@ -5,6 +5,8 @@
         string Name { get; }
         string Description { get; }
         string[] possibleLocation { get; }
+        
+        IObject? ObjectOnLocation { get; set; }
     }
     public class Forest : ILocation
     {
@@ -14,6 +16,8 @@
             "You are standing on a path in a dense forest.\n";
 
         public string[] possibleLocation => new[] { "square" };
+
+        public IObject? ObjectOnLocation { get; set; }
     }
     public class Square : ILocation
     {
@@ -26,5 +30,11 @@
             "as long as he has coins in his pocket and not air.\n";
 
         public string[] possibleLocation => new[] { "forest" };
+
+        public IObject? ObjectOnLocation { get; set; }
+        public Square(IObject objectOnLocation)
+        {
+            ObjectOnLocation = objectOnLocation;
+        }
     }
 }
