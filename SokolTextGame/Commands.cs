@@ -36,10 +36,24 @@
     {
         public void Execute(string[] words, World world)
         {
-            if (string.Join(" ", words) == "look") Console.Write("Look... What's next? You can look at your weapon\n");
+            var locObj = world.CurrentLocation().ObjectOnLocation;
+            if (string.Join(" ", words) == "look") Console.Write("Look... What's next? You can look at your weapon or look around\n");
+            else if (string.Join(" ", words.Take(2)) == "look at" && locObj?.Name == string.Join(" ", words.Skip(2))) Console.Write(locObj.Description);
+            else if ((words.Length > 2 && string.Join(" ", words.Take(2)) == "look at") && (locObj?.Name != string.Join(" ", words.Skip(2))))
+            {
+                Console.WriteLine("I don't see this object on location");
+            }
             else if (string.Join(" ", words) == "look at") Console.Write("Look at... what?\n");
             else if (string.Join(" ", words) == "look at my weapon") Console.Write(world?.player?.Weapon.Description);
-            else Console.Write("I know the command \"look at my weapon\"\n");
+            else if (string.Join(" ", words) == "look around")
+            {
+                if (string.IsNullOrEmpty(string.Join(" ", locObj)))
+                {
+                    Console.WriteLine("There's nothing to see in this place.");
+                }
+                else Console.WriteLine($"You see: {string.Join(" ", locObj.Name)}");
+            }
+            else Console.Write("I know commands \"look at my weapon\", \"look around\" and \"look at <object>\"\n");
         }
     }
     public class Where : ICommand
@@ -50,7 +64,7 @@
             else if (string.Join(" ", words) == "where am i") Console.Write(world.CurrentLocation().Description);
             else if (string.Join(" ", words) == "where can i go")
             {
-                string output = string.Join("", world.CurrentLocation().possibleLocation);
+                string output = string.Join(", ", world.CurrentLocation().possibleLocation);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Possible location : {output}");
                 Console.ResetColor();
@@ -110,6 +124,26 @@
             }
         }
     }
+    public class Talk : ICommand
+    {
+        public void Execute(string[] words, World world)
+        {
+            var locObj = world.CurrentLocation().ObjectOnLocation;
+            Console.ForegroundColor = ConsoleColor.Red;
+            if (string.Join(" ", words) == "talk") Console.Write("blah blah blah blah\nThe command exists, but you have to say \"talk to\"\n");
+            else if (string.Join(" ", words) == "talk to") Console.WriteLine("Talk to who?");
+            else if ((string.Join(" ", words.Take(2)) == "talk to") && locObj?.Name == string.Join(" ", words.Skip(2)))
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Random rand = new Random();
+                int randomIdex = rand.Next(0, locObj.LinesObjectSays.Length);
+                Console.WriteLine($"Guard: {locObj.LinesObjectSays[randomIdex]}");
+                Console.ResetColor();
+            }
+            else Console.WriteLine("There is no such thing here.");
+            Console.ResetColor();
+        }
+    }
 
     public class Unknown : ICommand
     {
@@ -120,7 +154,6 @@
             Console.ResetColor();
         }
     }
-
     public class CreatePlayer : ICommand
     {
         public void Execute(string[] words, World world)
