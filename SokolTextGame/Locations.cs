@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace SokolTextGame
+﻿namespace SokolTextGame
 {
     public interface ILocation
     {
