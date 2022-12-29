@@ -73,8 +73,8 @@
                 }
                 else
                 {
-                    var aviableLocation = world.CurrentLocation();
-                    if (aviableLocation.possibleLocation.Contains(locationName))
+                    var currentLocarion = world.CurrentLocation();
+                    if (currentLocarion.possibleLocation.Contains(locationName))
                     {
                         world.player.CurrentLocation = locationName;
                         Console.ForegroundColor = ConsoleColor.Yellow;
