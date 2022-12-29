@@ -40,15 +40,7 @@
             if (string.Join(" ", words) == "look") Console.Write("Look... What's next? You can look at your weapon or look around\n");
             else if (string.Join(" ", words) == "look at") Console.Write("Look at... what?\n");
             else if (string.Join(" ", words) == "look at my weapon") Console.Write(world?.player?.Weapon.Description);
-            else if (string.Join(" ", words) == "look at guard")
-            {
-                if (string.Join(" ", locObj.Name) != null &&
-                    string.Join(" ", locObj.Name) == words[2])
-                {
-                    Console.Write(locObj.Description);
-                }
-                else Console.WriteLine("I don't see this object on location");
-            }
+            else if (string.Join(" ", words.Take(2)) == "look at " && locObj?.Name == string.Join(" ",words.Skip(2))) Console.Write(locObj.Description);
             else if (string.Join(" ", words) == "look around")
             {
                 if (string.IsNullOrEmpty(string.Join(" ", locObj)))
