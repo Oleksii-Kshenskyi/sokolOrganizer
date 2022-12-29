@@ -62,27 +62,24 @@
     {
         public void Execute(string[] words, World world)
         {
-            if (words.Length == 3)
+            if (words.Length == 2 && string.Join(" ", words.Take(2)) == "go to")
             {
-                if (string.Join(" ", words.Take(2)) == "go to")
+                string locationName = string.Join(" ", words.Skip(2));
+                if (world?.player?.CurrentLocation == locationName)
                 {
-                    string locationName = string.Join(" ", words.Skip(2));
-                    if (world?.player?.CurrentLocation == locationName)
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"I am already in a location {world.player.CurrentLocation}");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    var aviableLocation = world.CurrentLocation();
+                    if (aviableLocation.possibleLocation.Contains(locationName))
                     {
+                        world.player.CurrentLocation = locationName;
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"I am already in a location {world.player.CurrentLocation}");
+                        Console.WriteLine($"Current location: {locationName.ToUpper()}");
                         Console.ResetColor();
-                    }
-                    else
-                    {
-                        var aviableLocation = world.CurrentLocation();
-                        if (aviableLocation.possibleLocation.Contains(locationName))
-                        {
-                            world.player.CurrentLocation = locationName;
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine($"Current location: {locationName.ToUpper()}");
-                            Console.ResetColor();
-                        }
                     }
                 }
             }
