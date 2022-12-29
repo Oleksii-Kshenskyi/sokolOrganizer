@@ -147,7 +147,7 @@
                 Console.ForegroundColor = ConsoleColor.Green;
                 Random rand = new Random();
                 int randomIdex = rand.Next(0, world.CurrentLocation().ObjectOnLocation.LinesObjectSays.Length);
-                Console.WriteLine($"Guarg: {world.CurrentLocation().ObjectOnLocation.LinesObjectSays[randomIdex]}");
+                Console.WriteLine($"Guard: {world.CurrentLocation().ObjectOnLocation.LinesObjectSays[randomIdex]}");
                 Console.ResetColor();
             }
             else Console.WriteLine("There is no such thing here.");
