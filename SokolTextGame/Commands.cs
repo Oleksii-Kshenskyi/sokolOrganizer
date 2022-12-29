@@ -36,25 +36,26 @@
     {
         public void Execute(string[] words, World world)
         {
+            var locObj = world.CurrentLocation().ObjectOnLocation;
             if (string.Join(" ", words) == "look") Console.Write("Look... What's next? You can look at your weapon or look around\n");
             else if (string.Join(" ", words) == "look at") Console.Write("Look at... what?\n");
             else if (string.Join(" ", words) == "look at my weapon") Console.Write(world?.player?.Weapon.Description);
             else if (string.Join(" ", words) == "look at guard")
             {
-                if (string.Join(" ", world.CurrentLocation()?.ObjectOnLocation?.Name) != null &&
-                    string.Join(" ", world.CurrentLocation()?.ObjectOnLocation?.Name) == words[2])
+                if (string.Join(" ", locObj.Name) != null &&
+                    string.Join(" ", locObj.Name) == words[2])
                 {
-                    Console.Write(world.CurrentLocation()?.ObjectOnLocation?.Description);
+                    Console.Write(locObj.Description);
                 }
                 else Console.WriteLine("I don't see this object on location");
             }
             else if (string.Join(" ", words) == "look around")
             {
-                if (string.IsNullOrEmpty(string.Join(" ", world.CurrentLocation().ObjectOnLocation)))
+                if (string.IsNullOrEmpty(string.Join(" ", locObj)))
                 {
                     Console.WriteLine("There's nothing to see in this place.");
                 }
-                else Console.WriteLine($"You see: {string.Join(" ", world.CurrentLocation()?.ObjectOnLocation?.Name)}");
+                else Console.WriteLine($"You see: {string.Join(" ", locObj.Name)}");
             }
             else Console.Write("I know the command \"look at my weapon\" and \"look around\"\n");
         }
@@ -67,7 +68,7 @@
             else if (string.Join(" ", words) == "where am i") Console.Write(world.CurrentLocation().Description);
             else if (string.Join(" ", words) == "where can i go")
             {
-                string output = string.Join(" ", world.CurrentLocation().possibleLocation);
+                string output = string.Join(",", world.CurrentLocation().possibleLocation);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Possible location : {output}");
                 Console.ResetColor();
@@ -131,23 +132,16 @@
     {
         public void Execute(string[] words, World world)
         {
+            var locObj = world.CurrentLocation().ObjectOnLocation;
             Console.ForegroundColor = ConsoleColor.Red;
             if (string.Join(" ", words) == "talk") Console.Write("blah blah blah blah\nThe command exists, but you have to say \"talk to\"\n");
-            else if (string.Join(" ", words) == "talk to")
-            {
-                if (string.IsNullOrEmpty(string.Join(" ", world.CurrentLocation().ObjectOnLocation)))
-                {
-                    Console.WriteLine("There are no interlocutors at the moment");
-                }
-                else Console.WriteLine("Talk to who?");
-            }
-            else if (string.Join(" ", words) == "talk to guard" &&
-                string.Join(" ", world.CurrentLocation()?.ObjectOnLocation?.Name) == words[2])
+            else if (string.Join(" ", words) == "talk to") Console.WriteLine("Talk to who?");
+            else if((string.Join(" ", words.Take(2)) == "talk to") && locObj?.Name == string.Join(" ", words.Skip(2)))
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Random rand = new Random();
-                int randomIdex = rand.Next(0, world.CurrentLocation().ObjectOnLocation.LinesObjectSays.Length);
-                Console.WriteLine($"Guard: {world.CurrentLocation().ObjectOnLocation.LinesObjectSays[randomIdex]}");
+                int randomIdex = rand.Next(0, locObj.LinesObjectSays.Length);
+                Console.WriteLine($"Guard: {locObj.LinesObjectSays[randomIdex]}");
                 Console.ResetColor();
             }
             else Console.WriteLine("There is no such thing here.");
