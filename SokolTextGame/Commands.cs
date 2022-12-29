@@ -20,6 +20,7 @@
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("See you later..");
             Environment.Exit(0);
+            Console.ResetColor();
         }
     }
     public class WhoAmI : ICommand
