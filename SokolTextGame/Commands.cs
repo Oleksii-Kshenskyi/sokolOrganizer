@@ -38,7 +38,7 @@ namespace SokolTextGame
     {
         public void Execute(string[] words, World world)
         {
-            if (string.Join(" ", words) == "look") Console.Write("Look... What's next? You can look at your weapon\n");
+            if (string.Join(" ", words) == "look") Console.Write("Look... What's next? You can look at your weapon or look around\n");
             else if (string.Join(" ", words) == "look at") Console.Write("Look at... what?\n");
             else if (string.Join(" ", words) == "look at my weapon") Console.Write(world?.player?.Weapon.Description);
             else if (string.Join(" ", words) == "look at guard")
@@ -166,7 +166,6 @@ namespace SokolTextGame
             Console.ResetColor();
         }
     }
-
     public class CreatePlayer : ICommand
     {
         public void Execute(string[] words, World world)
