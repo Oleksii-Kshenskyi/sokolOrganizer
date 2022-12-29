@@ -23,7 +23,7 @@
             Console.ResetColor();
         }
     }
-    public class WhoAmI : ICommand
+    public class Who : ICommand
     {
         public void Execute(string[] words, World world)
         {
@@ -42,7 +42,7 @@
             else Console.Write("I know the command \"look at my weapon\"\n");
         }
     }
-    public class WhereAmI : ICommand
+    public class Where : ICommand
     {
         public void Execute(string[] words, World world)
         {
@@ -58,7 +58,7 @@
             else Console.Write("I know the command \"where am i\" and \"where can i go\"\n");
         }
     }
-    public class GoTo : ICommand
+    public class Go : ICommand
     {
         public void Execute(string[] words, World world)
         {

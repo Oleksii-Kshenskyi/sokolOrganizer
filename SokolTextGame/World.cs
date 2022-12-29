@@ -8,10 +8,10 @@
         {
             commands["echo"] = new Echo();
             commands["exit"] = new Exit();
-            commands["who"] = new WhoAmI();
+            commands["who"] = new Who();
             commands["look"] = new Look();
-            commands["where"] = new WhereAmI();
-            commands["go"] = new GoTo();
+            commands["where"] = new Where();
+            commands["go"] = new Go();
         }
         private Dictionary<string, ILocation> locations = new();
         private void LocationDictionary()
