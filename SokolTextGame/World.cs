@@ -16,7 +16,7 @@
         private Dictionary<string, ILocation> locations = new();
         private void LocationDictionary()
         {
-            locations["forest"] = new Forest();
+            locations["forest"] = new Forest(null);
             locations["square"] = new Square(new Guard());
         }
         public ILocation CurrentLocation()

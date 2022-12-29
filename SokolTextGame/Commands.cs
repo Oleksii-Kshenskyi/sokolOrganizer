@@ -44,9 +44,17 @@
                 if (string.Join(" ", world.CurrentLocation()?.ObjectOnLocation?.Name) != null &&
                     string.Join(" ", world.CurrentLocation()?.ObjectOnLocation?.Name) == words[2])
                 {
-                    Console.Write(world.CurrentLocation().ObjectOnLocation.Description);
+                    Console.Write(world.CurrentLocation()?.ObjectOnLocation?.Description);
                 }
                 else Console.WriteLine("I don't see this object on location");
+            }
+            else if (string.Join(" ", words) == "look around")
+            {
+                if (string.IsNullOrEmpty(string.Join(" ", world.CurrentLocation().ObjectOnLocation)))
+                {
+                    Console.WriteLine("There's nothing to see in this place.");
+                }
+                else Console.WriteLine($"You see: {string.Join(" ", world.CurrentLocation()?.ObjectOnLocation?.Name)}");
             }
             else Console.Write("I know the command \"look at my weapon\"\n");
         }

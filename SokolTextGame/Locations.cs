@@ -18,6 +18,7 @@
         public string[] possibleLocation => new[] { "square" };
 
         public IObject? ObjectOnLocation { get; set; }
+        public Forest(IObject? objectOnLocation) => ObjectOnLocation = objectOnLocation;
     }
     public class Square : ILocation
     {
