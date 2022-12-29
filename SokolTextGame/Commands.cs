@@ -19,8 +19,8 @@
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("See you later..");
-            Environment.Exit(0);
             Console.ResetColor();
+            Environment.Exit(0);
         }
     }
     public class Who : ICommand
@@ -38,7 +38,7 @@
         {
             if (string.Join(" ", words) == "look") Console.Write("Look... What's next? You can look at your weapon\n");
             else if (string.Join(" ", words) == "look at") Console.Write("Look at... what?\n");
-            else if (string.Join(" ", words) == "look at my weapon") Console.Write(world?.player?.Weapon.Descriprion);
+            else if (string.Join(" ", words) == "look at my weapon") Console.Write(world?.player?.Weapon.Description);
             else Console.Write("I know the command \"look at my weapon\"\n");
         }
     }
