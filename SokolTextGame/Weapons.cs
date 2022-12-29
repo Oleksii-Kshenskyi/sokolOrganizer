@@ -1,14 +1,12 @@
-﻿using System;
-
-namespace SokolTextGame
+﻿namespace SokolTextGame
 {
     public interface IWeapon
     {
-        public string Descriprion { get; }
+        public string Description { get; }
     }
 
     public class BareFists : IWeapon
     {
-        public string Descriprion { get; } = "Bare fists. What else could it be?\n";
+        public string Description { get; } = "Bare fists. What else could it be?\n";
     }
 }
