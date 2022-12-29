@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace SokolTextGame
+﻿namespace SokolTextGame
 {
     public interface ICommand
     {
@@ -148,8 +146,8 @@ namespace SokolTextGame
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Random rand = new Random();
-                int randomIdex = rand.Next(0, world.CurrentLocation().ObjectOnLocation.ObjectPharse.Length);
-                Console.WriteLine($"Guarg: {world.CurrentLocation().ObjectOnLocation.ObjectPharse[randomIdex]}");
+                int randomIdex = rand.Next(0, world.CurrentLocation().ObjectOnLocation.LinesObjectSays.Length);
+                Console.WriteLine($"Guarg: {world.CurrentLocation().ObjectOnLocation.LinesObjectSays[randomIdex]}");
                 Console.ResetColor();
             }
             else Console.WriteLine("There is no such thing here.");
