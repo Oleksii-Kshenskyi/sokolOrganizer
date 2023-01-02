@@ -25,3 +25,14 @@ public class Guard : IObject
     "Watermelon – it’s a good fruit. You eat, you drink, you wash your face.\n",
     "Death is hereditary.\n"};
 }
+
+public class Shopkeeper : IObject
+{
+    public string Name => "shopkeeper";
+
+    public string Description => "A grandfather, with a big gray beard and strong facial features.\n" +
+        "He had met many travelers, seen many battles, and knew many secrets about weapons,\n" +
+        "but he was not very willing to share those secrets.\n";
+
+    public string[] LinesObjectSays => new[] {"Stop talking and buy something already!"};
+}
