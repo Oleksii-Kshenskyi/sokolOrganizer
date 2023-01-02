@@ -38,4 +38,19 @@
             ObjectOnLocation = objectOnLocation;
         }
     }
+
+    public class WeaponShop : ILocation
+    {
+        public string Name => "weapon shop";
+
+        public string Description => "Weapon store, a place where you can choose weapons to your liking,\n" +
+            " and perhaps something else as well. If you are a warrior, you can look out for an axe,\n" +
+            " and if you are an outlaw, why not pick up a light sword. And if you are a wizard,\n" +
+            " there is also a staff, which will be a good companion in battles.\n";
+
+        public string[] possibleLocation => new[] { "square" };
+
+        public IObject? ObjectOnLocation { get; set; }
+        public WeaponShop(IObject? objectOnLocation) => ObjectOnLocation = objectOnLocation;
+    }
 }
