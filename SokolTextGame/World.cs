@@ -13,12 +13,15 @@
             commands["where"] = new Where();
             commands["go"] = new Go();
             commands["talk"] = new Talk();
+            commands["what"] = new What();
+            commands["buy"] = new Buy();
         }
         private Dictionary<string, ILocation> locations = new();
         private void LocationDictionary()
         {
             locations["forest"] = new Forest(null);
             locations["square"] = new Square(new Guard());
+            locations["weapon shop"] = new WeaponShop(new Shopkeeper());
         }
         public ILocation CurrentLocation()
         {
@@ -35,7 +38,12 @@
                 .ToArray();
             commands.GetValueOrDefault(commandList[0], new Unknown()).Execute(commandList, this);
         }
-
+        public void GetWeapon(string weaponName)
+        {
+            if (weaponName == "axe") player.Weapon = new Axe();
+            else if (weaponName == "sword") player.Weapon = new Sword();
+            else if (weaponName == "staff") player.Weapon = new Staff();
+        }
         public World()
         {
             CommandDictionary();
