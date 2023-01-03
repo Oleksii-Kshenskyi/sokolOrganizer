@@ -14,6 +14,7 @@
             commands["go"] = new Go();
             commands["talk"] = new Talk();
             commands["what"] = new What();
+            commands["buy"] = new Buy();
         }
         private Dictionary<string, ILocation> locations = new();
         private void LocationDictionary()
@@ -37,8 +38,14 @@
                 .ToArray();
             commands.GetValueOrDefault(commandList[0], new Unknown()).Execute(commandList, this);
         }
+        public void GetWeapon(string weaponName)
+        {
 
-        public World()
+            if (weaponName == "axe") player.Weapon = new Axe();
+            else if (weaponName == "sword") player.Weapon = new Sword();
+            else if (weaponName == "staff") player.Weapon = new Staff();
+        }
+    public World()
         {
             CommandDictionary();
             player = null;

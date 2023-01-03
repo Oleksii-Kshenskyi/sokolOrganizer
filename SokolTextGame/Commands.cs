@@ -1,4 +1,7 @@
-﻿namespace SokolTextGame
+﻿using System.Threading.Tasks.Dataflow;
+using System.Xml.Schema;
+
+namespace SokolTextGame
 {
     public interface ICommand
     {
@@ -38,13 +41,13 @@
         {
             var locObj = world.CurrentLocation().ObjectOnLocation;
             if (string.Join(" ", words) == "look") Console.Write("Look... What's next? You can look at your weapon or look around\n");
+            else if (string.Join(" ", words) == "look at my weapon") Console.Write(world?.player?.Weapon.Description);
             else if (string.Join(" ", words.Take(2)) == "look at" && locObj?.Name == string.Join(" ", words.Skip(2))) Console.Write(locObj.Description);
             else if ((words.Length > 2 && string.Join(" ", words.Take(2)) == "look at") && (locObj?.Name != string.Join(" ", words.Skip(2))))
             {
                 Console.WriteLine("I don't see this object on location");
             }
-            else if (string.Join(" ", words) == "look at") Console.Write("Look at... what?\n");
-            else if (string.Join(" ", words) == "look at my weapon") Console.Write(world?.player?.Weapon.Description);
+            else if (string.Join(" ", words) == "look at") Console.Write("Look at... what?\n");            
             else if (string.Join(" ", words) == "look around")
             {
                 if (string.IsNullOrEmpty(string.Join(" ", locObj)))
@@ -155,11 +158,32 @@
                 if (locObj?.ItemsForSale != null)
                 {
                     var output = string.Join(", ", locObj.ItemsForSale);
-                    Console.WriteLine($"You can buy : {output}");
+                    Console.WriteLine($"You can buy : {output}.\n");
                 }
                 else Console.WriteLine("No one is selling anything here.");
             }
             else Console.WriteLine("Use the command \"What can I buy\"");
+        }
+    }
+    public class Buy : ICommand
+    {
+        public void Execute(string[] words, World world)
+        {
+            if (string.Join(" ", words) == "buy" || words.Length != 4) Console.WriteLine("Use: buy <weapon> from <seller>");
+            else if (world.CurrentLocation().ObjectOnLocation != null)
+            {
+                var locObj = world.CurrentLocation().ObjectOnLocation;
+                var weaponName = words[1];
+                if (words[0] == "buy" &&
+                    locObj.ItemsForSale.Contains(words[1]) &&
+                    words[2] == "from" &&
+                    words[3] == locObj.Name)
+                {
+                    world.GetWeapon(weaponName);
+                    Console.WriteLine($"Congratulations, you bought {weaponName} from {locObj.Name}");
+                }
+            }
+            else Console.WriteLine("No vendors nearby.");
         }
     }
 

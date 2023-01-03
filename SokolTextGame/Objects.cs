@@ -38,5 +38,5 @@ public class Shopkeeper : IObject
         "but he was not very willing to share those secrets.\n";
 
     public string[] LinesObjectSays => new[] {"Stop talking and buy something already!"};
-    public string[] ItemsForSale { get; } = new[] { "Axe", "Sword", "Staff" };
+    public string[] ItemsForSale { get; } = new[] { "axe", "sword", "staff" };
 }
