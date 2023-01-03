@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks.Dataflow;
-using System.Xml.Schema;
-
-namespace SokolTextGame
+﻿namespace SokolTextGame
 {
     public interface ICommand
     {
@@ -65,14 +62,14 @@ namespace SokolTextGame
             else if (string.Join(" ", words) == "look at") Console.Write("Look at... what?\n");
             else if (string.Join(" ", words) == "look around")
             {
-                if (string.IsNullOrEmpty(string.Join(" ", locObj)))
+                if (locObj == null)
                 {
                     Console.WriteLine("There's nothing to see in this place.");
                 }
                 else
                 {
                     Console.ForegroundColor= ConsoleColor.Green;
-                    Console.WriteLine($"You see: {string.Join(" ", locObj.Name)}");
+                    Console.WriteLine($"You see: {locObj.Name}");
                 }
             }
             else Console.Write("I know commands \"look at my weapon\", \"look around\" and \"look at <object>\"\n");
@@ -179,7 +176,7 @@ namespace SokolTextGame
         {
             Console.ForegroundColor = ConsoleColor.Red;
             var locObj = world.CurrentLocation().ObjectOnLocation;
-            if (string.Join(" ", words) == "what") Console.WriteLine("You can use the command \"What can I buy\"");
+            if (string.Join(" ", words) == "what") Console.WriteLine("What \"what\"?");
             else if ((string.Join(" ", words) == "what can i buy"))
             {
                 if (locObj?.ItemsForSale != null)
@@ -214,7 +211,12 @@ namespace SokolTextGame
                     world.GetWeapon(weaponName);
                     Console.WriteLine($"Congratulations, you bought {weaponName} from {locObj.Name}");
                 }
-                else Console.WriteLine($"{locObj.Name} does not like to be pestered for no reason");
+                else if (words[3] == locObj.Name && locObj.ItemsForSale == null)
+                {
+                    Console.WriteLine($"Do you want to buy something from a {locObj.Name}? Really?\n You'd better go to a weapon shop.");
+                }
+                else if (words[3] != locObj.Name) Console.WriteLine($"Who is {words[3]}? Perhaps you have the wrong shop?");
+                else Console.WriteLine($"{locObj.Name} doesn't have any {weaponName}s to sell you.");
             }
             else Console.WriteLine("No vendors nearby.");
             Console.ResetColor();
