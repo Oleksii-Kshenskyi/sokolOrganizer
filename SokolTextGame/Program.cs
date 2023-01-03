@@ -3,9 +3,12 @@
 World? world = null;
 while (true)
 {
-    Console.Write("Welcome! You will need a character to play the game." +
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.Write("[Welcome!]\n" +
+        "[You will need a character to play the game.]\n" +
         "\nChoose who you want to be:\nWarrior\nRogue\nWizard\n~~>>");
     string? userInput = Console.ReadLine();
+    Console.ResetColor();
 
     if (userInput != null)
     {

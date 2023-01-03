@@ -30,41 +30,66 @@ namespace SokolTextGame
     {
         public void Execute(string[] words, World world)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             if (string.Join(" ", words) == "who") Console.Write("who, who? =)\n");
-            else if (string.Join(" ", words) == "who am i") Console.Write(world?.player?.Description);
+            else if (string.Join(" ", words) == "who am i")
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(world?.player?.Description);
+            }
             else Console.Write("I know the command \"who am i\"\n");
+            Console.ResetColor();
         }
     }
     public class Look : ICommand
     {
         public void Execute(string[] words, World world)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             var locObj = world.CurrentLocation().ObjectOnLocation;
             if (string.Join(" ", words) == "look") Console.Write("Look... What's next? You can look at your weapon or look around\n");
-            else if (string.Join(" ", words) == "look at my weapon") Console.Write(world?.player?.Weapon.Description);
-            else if (string.Join(" ", words.Take(2)) == "look at" && locObj?.Name == string.Join(" ", words.Skip(2))) Console.Write(locObj.Description);
+            else if (string.Join(" ", words) == "look at my weapon")
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(world?.player?.Weapon.Description);
+            }
+            else if (string.Join(" ", words.Take(2)) == "look at" && locObj?.Name == string.Join(" ", words.Skip(2)))
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(locObj.Description);
+            }
             else if ((words.Length > 2 && string.Join(" ", words.Take(2)) == "look at") && (locObj?.Name != string.Join(" ", words.Skip(2))))
             {
                 Console.WriteLine("I don't see this object on location");
             }
-            else if (string.Join(" ", words) == "look at") Console.Write("Look at... what?\n");            
+            else if (string.Join(" ", words) == "look at") Console.Write("Look at... what?\n");
             else if (string.Join(" ", words) == "look around")
             {
                 if (string.IsNullOrEmpty(string.Join(" ", locObj)))
                 {
                     Console.WriteLine("There's nothing to see in this place.");
                 }
-                else Console.WriteLine($"You see: {string.Join(" ", locObj.Name)}");
+                else
+                {
+                    Console.ForegroundColor= ConsoleColor.Green;
+                    Console.WriteLine($"You see: {string.Join(" ", locObj.Name)}");
+                }
             }
             else Console.Write("I know commands \"look at my weapon\", \"look around\" and \"look at <object>\"\n");
+            Console.ResetColor();
         }
     }
     public class Where : ICommand
     {
         public void Execute(string[] words, World world)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             if (string.Join(" ", words) == "where") Console.Write("Where? Where what? Or where who?\n");
-            else if (string.Join(" ", words) == "where am i") Console.Write(world.CurrentLocation().Description);
+            else if (string.Join(" ", words) == "where am i")
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(world.CurrentLocation().Description);
+            }
             else if (string.Join(" ", words) == "where can i go")
             {
                 string output = string.Join(", ", world.CurrentLocation().possibleLocation);
@@ -73,6 +98,7 @@ namespace SokolTextGame
                 Console.ResetColor();
             }
             else Console.Write("I know the command \"where am i\" and \"where can i go\"\n");
+            Console.ResetColor();
         }
     }
     public class Go : ICommand
@@ -151,6 +177,7 @@ namespace SokolTextGame
     {
         public void Execute(string[] words, World world)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             var locObj = world.CurrentLocation().ObjectOnLocation;
             if (string.Join(" ", words) == "what") Console.WriteLine("You can use the command \"What can I buy\"");
             else if ((string.Join(" ", words) == "what can i buy"))
@@ -158,32 +185,39 @@ namespace SokolTextGame
                 if (locObj?.ItemsForSale != null)
                 {
                     var output = string.Join(", ", locObj.ItemsForSale);
-                    Console.WriteLine($"You can buy : {output}.\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"You can buy : {output} from a {locObj.Name}\n");
                 }
                 else Console.WriteLine("No one is selling anything here.");
             }
             else Console.WriteLine("Use the command \"What can I buy\"");
+            Console.ResetColor();
         }
     }
     public class Buy : ICommand
     {
         public void Execute(string[] words, World world)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             if (string.Join(" ", words) == "buy" || words.Length != 4) Console.WriteLine("Use: buy <weapon> from <seller>");
             else if (world.CurrentLocation().ObjectOnLocation != null)
             {
                 var locObj = world.CurrentLocation().ObjectOnLocation;
                 var weaponName = words[1];
-                if (words[0] == "buy" &&
+                if (locObj.ItemsForSale != null &&
+                    words[0] == "buy" &&
                     locObj.ItemsForSale.Contains(words[1]) &&
                     words[2] == "from" &&
                     words[3] == locObj.Name)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     world.GetWeapon(weaponName);
                     Console.WriteLine($"Congratulations, you bought {weaponName} from {locObj.Name}");
                 }
+                else Console.WriteLine($"{locObj.Name} does not like to be pestered for no reason");
             }
             else Console.WriteLine("No vendors nearby.");
+            Console.ResetColor();
         }
     }
 

@@ -40,12 +40,11 @@
         }
         public void GetWeapon(string weaponName)
         {
-
             if (weaponName == "axe") player.Weapon = new Axe();
             else if (weaponName == "sword") player.Weapon = new Sword();
             else if (weaponName == "staff") player.Weapon = new Staff();
         }
-    public World()
+        public World()
         {
             CommandDictionary();
             player = null;
