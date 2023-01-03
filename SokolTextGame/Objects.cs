@@ -7,6 +7,8 @@ namespace SokolTextGame
         public string Name { get; }
         public string Description { get; }
         public string[] LinesObjectSays { get; }
+
+        public string[] ItemsForSale { get; }
     }
 }
 public class Guard : IObject
@@ -24,6 +26,7 @@ public class Guard : IObject
     "It is awfully hard work doing nothing.\n",
     "Watermelon – it’s a good fruit. You eat, you drink, you wash your face.\n",
     "Death is hereditary.\n"};
+    public string[] ItemsForSale { get; } = null;
 }
 
 public class Shopkeeper : IObject
@@ -35,4 +38,5 @@ public class Shopkeeper : IObject
         "but he was not very willing to share those secrets.\n";
 
     public string[] LinesObjectSays => new[] {"Stop talking and buy something already!"};
+    public string[] ItemsForSale { get; } = new[] { "Axe", "Sword", "Staff" };
 }

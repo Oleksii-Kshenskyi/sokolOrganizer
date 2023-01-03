@@ -137,11 +137,29 @@
                 Console.ForegroundColor = ConsoleColor.Green;
                 Random rand = new Random();
                 int randomIdex = rand.Next(0, locObj.LinesObjectSays.Length);
-                Console.WriteLine($"Guard: {locObj.LinesObjectSays[randomIdex]}");
+                Console.WriteLine($"{locObj.Name}: {locObj.LinesObjectSays[randomIdex]}");
                 Console.ResetColor();
             }
             else Console.WriteLine("There is no such thing here.");
             Console.ResetColor();
+        }
+    }
+    public class What : ICommand
+    {
+        public void Execute(string[] words, World world)
+        {
+            var locObj = world.CurrentLocation().ObjectOnLocation;
+            if (string.Join(" ", words) == "what") Console.WriteLine("You can use the command \"What can I buy\"");
+            else if ((string.Join(" ", words) == "what can i buy"))
+            {
+                if (locObj?.ItemsForSale != null)
+                {
+                    var output = string.Join(", ", locObj.ItemsForSale);
+                    Console.WriteLine($"You can buy : {output}");
+                }
+                else Console.WriteLine("No one is selling anything here.");
+            }
+            else Console.WriteLine("Use the command \"What can I buy\"");
         }
     }
 
