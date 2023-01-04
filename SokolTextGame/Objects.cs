@@ -1,5 +1,6 @@
 ﻿using SokolTextGame;
 
+
 namespace SokolTextGame
 {
     public interface IObject
@@ -8,6 +9,8 @@ namespace SokolTextGame
         public string Description { get; }
         public string[] LinesObjectSays { get; }
         public string[] ItemsForSale { get; }
+        public bool ObjectIsAlive { get; set; }
+        public int HealtObject { get; set; }
     }
 }
 public class Guard : IObject
@@ -22,16 +25,21 @@ public class Guard : IObject
     "Watermelon – it’s a good fruit. You eat, you drink, you wash your face.\n",
     "Death is hereditary.\n"};
     public string[] ItemsForSale { get; } = null;
+    public bool ObjectIsAlive { get; set; } = true;
+    public int HealtObject { get; set; } = 100;
 }
 
 public class Shopkeeper : IObject
 {
     public string Name => "shopkeeper";
-    public string Description => "A grandfather, with a big gray beard and strong facial features.\n" +
+    public string Description => "A old man, with a big gray beard and strong facial features.\n" +
         "He had met many travelers, seen many battles, and knew many secrets about weapons,\n" +
         "but he was not very willing to share those secrets.\n";
-    public string[] LinesObjectSays => new[] {"Stop talking and buy something already!"};
+    public string[] LinesObjectSays => new[] { "Stop talking and buy something already!" };
     public string[] ItemsForSale { get; } = new[] { "axe", "sword", "staff" };
+    public bool ObjectIsAlive { get; set; } = true;
+
+    public int HealtObject { get; set; } = 100;
 }
 public class Monster : IObject
 {
@@ -41,7 +49,10 @@ public class Monster : IObject
         "Its body shows scars, most likely from travelers who sought shelter from the rain and found their doom\n" +
         "because the beast lies on a pile of bones\n ";
 
-    public string[] LinesObjectSays => throw new NotImplementedException();
+    public string[] LinesObjectSays => new[] { " Too skinny... And I was craving meat today..." };
 
     public string[] ItemsForSale => null;
+
+    public bool ObjectIsAlive { get; set; } = true;
+    public int HealtObject { get; set; } = 100;
 }

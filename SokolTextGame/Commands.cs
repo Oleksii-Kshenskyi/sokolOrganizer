@@ -158,7 +158,7 @@
             Console.ForegroundColor = ConsoleColor.Red;
             if (string.Join(" ", words) == "talk") Console.Write("blah blah blah blah\nThe command exists, but you have to say \"talk to\"\n");
             else if (string.Join(" ", words) == "talk to") Console.WriteLine("Talk to who?");
-            else if ((string.Join(" ", words.Take(2)) == "talk to") && locObj?.Name == string.Join(" ", words.Skip(2)))
+            else if ((string.Join(" ", words.Take(2)) == "talk to") && locObj?.Name == string.Join(" ", words.Skip(2)) && locObj.ObjectIsAlive)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Random rand = new Random();

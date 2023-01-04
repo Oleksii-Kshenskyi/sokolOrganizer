@@ -5,6 +5,7 @@
         public string Description { get; }
         public IWeapon Weapon { get; set; }
         public string CurrentLocation { get; set; }
+        public int HealtPlayer { get; set; }
     }
     public class Warrior : IPlayer
     {
@@ -18,6 +19,7 @@
         {
             Weapon = weapon;
         }
+        public int HealtPlayer { get; set; } = 100;
     }
     public class Rogue : IPlayer
     {
@@ -30,6 +32,7 @@
         {
             Weapon = weapon;
         }
+        public int HealtPlayer { get; set; } = 100; 
     }
     public class Wizard : IPlayer
     {
@@ -42,5 +45,6 @@
         {
             Weapon = weapon;
         }
+        public int HealtPlayer { get; set; } = 100;
     }
 }

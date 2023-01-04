@@ -30,7 +30,7 @@
             "Blacksmiths who use their huge hammers to make weapons that every traveler can buy,\n" +
             "as long as he has coins in his pocket and not air.\n";
 
-        public string[] possibleLocation => new[] { "forest", "weapon shop"};
+        public string[] possibleLocation => new[] { "forest", "weapon shop", "cave"};
 
         public IObject? ObjectOnLocation { get; set; }
         public Square(IObject objectOnLocation)
