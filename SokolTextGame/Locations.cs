@@ -53,4 +53,17 @@
         public IObject? ObjectOnLocation { get; set; }
         public WeaponShop(IObject? objectOnLocation) => ObjectOnLocation = objectOnLocation;
     }
+    public class Cave : ILocation
+    {
+        public string Name => "cave";
+
+        public string Description => "A dark place that has one entrance and one exit.\n" +
+            "There are traces of dried blood on the walls.\n" +
+            "The deadly smell in the air makes it clear that not everyone who entered here\n" +
+            "could see the light of day again.";
+
+        public string[] possibleLocation => new[] { "square" };
+
+        public IObject? ObjectOnLocation { get; set; }
+    }
 }
