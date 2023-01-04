@@ -8,7 +8,7 @@ namespace SokolTextGame
         public string[] LinesObjectSays { get; }
         public string[] ItemsForSale { get; }
         public bool ObjectIsAlive { get; set; }
-        public int HealtObject { get; set; }
+        public int HPObject { get; set; }
         public int DamageObject { get; set; }
     }
 }
@@ -25,22 +25,22 @@ public class Guard : IObject
     "Death is hereditary.\n"};
     public string[] ItemsForSale { get; } = null;
     public bool ObjectIsAlive { get; set; } = true;
-    public int HealtObject { get; set; } = 100;
-    public int DamageObject { get; set; } = 50;
+    public int HPObject { get; set; } = 100;
+    public int DamageObject { get; set; } = 5000;
 }
 
 public class Shopkeeper : IObject
 {
     public string Name => "shopkeeper";
-    public string Description => "A old man, with a big gray beard and strong facial features.\n" +
+    public string Description => "An old man, with a big gray beard and strong facial features.\n" +
     "He had met many travelers, seen many battles, and knew many secrets about weapons,\n" +
     "but he was not very willing to share those secrets.\n";
     public string[] LinesObjectSays => new[] { "Stop talking and buy something already!" };
     public string[] ItemsForSale { get; } = new[] { "axe", "sword", "staff" };
     public bool ObjectIsAlive { get; set; } = true;
 
-    public int HealtObject { get; set; } = 100;
-    public int DamageObject { get; set; } = 50;
+    public int HPObject { get; set; } = 100;
+    public int DamageObject { get; set; } = 5000;
 }
 public class Monster : IObject
 {
@@ -55,6 +55,6 @@ public class Monster : IObject
     public string[] ItemsForSale => null;
 
     public bool ObjectIsAlive { get; set; } = true;
-    public int HealtObject { get; set; } = 100;
+    public int HPObject { get; set; } = 100;
     public int DamageObject { get; set; } = 25;
 }

@@ -17,7 +17,7 @@
     {
         public string Description { get; } = "There is always something to do with an axe.\nYou can split firewood, or you can split a skull.\n";
         public string Name { get; set; } = "axe";
-        public int WeaponDamage { get; set; } = 25;
+        public int WeaponDamage { get; set; } = 35;
     }
     public class Sword : IWeapon
     {

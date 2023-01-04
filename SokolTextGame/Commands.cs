@@ -244,15 +244,15 @@
             else if (words[0] == "attack" && locObj.Name == words[1] && locObj.ObjectIsAlive == true)
             {
                 string objectName = locObj.Name;
-                int hpObject = locObj.HealtObject;
-                int hpPlayer = world.player.HealtPlayer;
+                int hpObject = locObj.HPObject;
+                int hpPlayer = world.player.HPPlayer;
                 while (hpObject > 0 || hpPlayer > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     int damageObject = new Random().Next(1, locObj.DamageObject + 1);
                     int damagePlayer = new Random().Next(1, world.player.Weapon.WeaponDamage + 1);
                     Console.WriteLine($"You have {hpPlayer} health");
-                    Console.WriteLine($"{objectName} have {hpObject} health");
+                    Console.WriteLine($"{objectName} has {hpObject} health");
                     Console.WriteLine($"Write \"attack\" to attack {objectName} or \"block\" to block an {objectName} attack");
                     string inputCommand = Console.ReadLine().ToLower().Trim();
                     if (inputCommand == "attack")
@@ -271,7 +271,8 @@
                         if (hpPlayer <= 0)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("You're dead. Thanks for playing.");
+                            Console.WriteLine("You're dead.\nNext time pick a lighter opponent.\nThanks for playing.");
+                            Console.ResetColor();
                             Environment.Exit(0);
                         }
                     }
