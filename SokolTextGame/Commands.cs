@@ -236,7 +236,7 @@
         {
             Console.ForegroundColor = ConsoleColor.Red;
             var locObj = world.CurrentLocation().ObjectOnLocation;
-            if (string.Join(" ", words) == "attack") Console.WriteLine("Use <attack> <object>");
+            if (string.Join(" ", words) == "attack" || words.Length > 2) Console.WriteLine("Use <attack> <object>");
             else if ((words[0] == "attack" && locObj.Name == words[1] && locObj.ObjectIsAlive == false))
             {
                 Console.WriteLine($"You've already killed {locObj.Name}.");
@@ -254,7 +254,7 @@
                     Console.WriteLine($"You have {hpPlayer} health");
                     Console.WriteLine($"{objectName} have {hpObject} health");
                     Console.WriteLine($"Write \"attack\" to attack {objectName} or \"block\" to block an {objectName} attack");
-                    string inputCommand = Console.ReadLine().ToLower();
+                    string inputCommand = Console.ReadLine().ToLower().Trim();
                     if (inputCommand == "attack")
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -278,6 +278,11 @@
                     else if (inputCommand == "block") Console.WriteLine($"You blocked a {objectName} attack! Damage blocked : {damageObject}");
                     else Console.WriteLine("Please write \"attack\" or \"block\"");
                 }
+            }
+            else if (words[0] == "attack" && words[1] != locObj.Name)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"There is no {words[1]} in this area.\r\nUse command \"attack <name object>\"");
             }
             Console.ResetColor();
         }
