@@ -32,7 +32,7 @@
         {
             Weapon = weapon;
         }
-        public int HealtPlayer { get; set; } = 100; 
+        public int HealtPlayer { get; set; } = 100;
     }
     public class Wizard : IPlayer
     {

@@ -1,6 +1,4 @@
 ﻿using SokolTextGame;
-
-
 namespace SokolTextGame
 {
     public interface IObject
@@ -11,13 +9,14 @@ namespace SokolTextGame
         public string[] ItemsForSale { get; }
         public bool ObjectIsAlive { get; set; }
         public int HealtObject { get; set; }
+        public int DamageObject { get; set; }
     }
 }
 public class Guard : IObject
 {
     public string Name => "guard";
     public string Description => "The guard is a man in steel armor and with a huge two-handed club.\n" +
-        "You don't want to fight him, but you can ask him something.\n";
+    "You don't want to fight him, but you can ask him something.\n";
     public string[] LinesObjectSays => new[] { "What is that smell? Isn't that shit on your shoe?\n",
     "Life is a nightmare that prevents one from sleeping.\n",
     "Be yourself; everyone else is already taken\n",
@@ -27,19 +26,21 @@ public class Guard : IObject
     public string[] ItemsForSale { get; } = null;
     public bool ObjectIsAlive { get; set; } = true;
     public int HealtObject { get; set; } = 100;
+    public int DamageObject { get; set; } = 50;
 }
 
 public class Shopkeeper : IObject
 {
     public string Name => "shopkeeper";
     public string Description => "A old man, with a big gray beard and strong facial features.\n" +
-        "He had met many travelers, seen many battles, and knew many secrets about weapons,\n" +
-        "but he was not very willing to share those secrets.\n";
+    "He had met many travelers, seen many battles, and knew many secrets about weapons,\n" +
+    "but he was not very willing to share those secrets.\n";
     public string[] LinesObjectSays => new[] { "Stop talking and buy something already!" };
     public string[] ItemsForSale { get; } = new[] { "axe", "sword", "staff" };
     public bool ObjectIsAlive { get; set; } = true;
 
     public int HealtObject { get; set; } = 100;
+    public int DamageObject { get; set; } = 50;
 }
 public class Monster : IObject
 {
@@ -55,4 +56,5 @@ public class Monster : IObject
 
     public bool ObjectIsAlive { get; set; } = true;
     public int HealtObject { get; set; } = 100;
+    public int DamageObject { get; set; } = 25;
 }

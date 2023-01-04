@@ -28,7 +28,7 @@
     public class Staff : IWeapon
     {
         public string Description { get; } = "Staff made of old oak, handle covered with leather,\nif you know the spell, you can use the staff for additional damage,\nand if not, you can use it as a two-handed cudgel.\n";
-        public string Name { get; set; } = "staff"; 
+        public string Name { get; set; } = "staff";
         public int WeaponDamage { get; set; } = 25;
     }
 }

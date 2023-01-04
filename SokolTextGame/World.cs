@@ -15,6 +15,7 @@
             commands["talk"] = new Talk();
             commands["what"] = new What();
             commands["buy"] = new Buy();
+            commands["attack"] = new Attack();
         }
         private Dictionary<string, ILocation> locations = new();
         private void LocationDictionary()
