@@ -50,7 +50,11 @@
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write(world?.player?.Weapon.Description);
             }
-            else if (string.Join(" ", words.Take(2)) == "look at" && locObj?.Name == string.Join(" ", words.Skip(2)))
+            else if (string.Join(" ", words.Take(2)) == "look at" && locObj?.Name == string.Join(" ", words.Skip(2)) && locObj.ObjectIsAlive == false)
+            {
+                Console.WriteLine("It's not a pretty picture, considering you're the one who cracked his skull. ");
+            }
+            else if (string.Join(" ", words.Take(2)) == "look at" && locObj?.Name == string.Join(" ", words.Skip(2)) && locObj.ObjectIsAlive == true)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write(locObj.Description);
@@ -68,7 +72,7 @@
                 }
                 else
                 {
-                    Console.ForegroundColor= ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"You see: {locObj.Name}");
                 }
             }
@@ -158,7 +162,11 @@
             Console.ForegroundColor = ConsoleColor.Red;
             if (string.Join(" ", words) == "talk") Console.Write("blah blah blah blah\nThe command exists, but you have to say \"talk to\"\n");
             else if (string.Join(" ", words) == "talk to") Console.WriteLine("Talk to who?");
-            else if ((string.Join(" ", words.Take(2)) == "talk to") && locObj?.Name == string.Join(" ", words.Skip(2)))
+            else if ((string.Join(" ", words.Take(2)) == "talk to") && locObj?.Name == string.Join(" ", words.Skip(2)) && locObj.ObjectIsAlive == false)
+            {
+                Console.WriteLine("He's busy right now. He's dead.");
+            }
+            else if ((string.Join(" ", words.Take(2)) == "talk to") && locObj?.Name == string.Join(" ", words.Skip(2)) && locObj.ObjectIsAlive == true)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Random rand = new Random();
@@ -219,6 +227,64 @@
                 else Console.WriteLine($"{locObj.Name} doesn't have any {weaponName}s to sell you.");
             }
             else Console.WriteLine("No vendors nearby.");
+            Console.ResetColor();
+        }
+    }
+    public class Attack : ICommand
+    {
+        public void Execute(string[] words, World world)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            var locObj = world.CurrentLocation().ObjectOnLocation;
+            if (string.Join(" ", words) == "attack" || words.Length > 2) Console.WriteLine("Use <attack> <object>");
+            else if ((words[0] == "attack" && locObj.Name == words[1] && locObj.ObjectIsAlive == false))
+            {
+                Console.WriteLine($"You've already killed {locObj.Name}.");
+            }
+            else if (words[0] == "attack" && locObj.Name == words[1] && locObj.ObjectIsAlive == true)
+            {
+                string objectName = locObj.Name;
+                int hpObject = locObj.HPObject;
+                int hpPlayer = world.player.HPPlayer;
+                while (hpObject > 0 || hpPlayer > 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    int damageObject = new Random().Next(1, locObj.DamageObject + 1);
+                    int damagePlayer = new Random().Next(1, world.player.Weapon.WeaponDamage + 1);
+                    Console.WriteLine($"You have {hpPlayer} health");
+                    Console.WriteLine($"{objectName} has {hpObject} health");
+                    Console.WriteLine($"Write \"attack\" to attack {objectName} or \"block\" to block an {objectName} attack");
+                    string inputCommand = Console.ReadLine().ToLower().Trim();
+                    if (inputCommand == "attack")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"You have dealt {damagePlayer} damage to the {objectName}.");
+                        hpObject -= damagePlayer;
+                        if (hpObject <= 0)
+                        {
+                            Console.WriteLine("You win!");
+                            world.CurrentLocation().ObjectOnLocation.ObjectIsAlive = false;
+                            break;
+                        }
+                        Console.WriteLine($"{objectName} did {damageObject} damage to you.");
+                        hpPlayer -= damageObject;
+                        if (hpPlayer <= 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("You're dead.\nNext time pick an easier opponent.\nThanks for playing.");
+                            Console.ResetColor();
+                            Environment.Exit(0);
+                        }
+                    }
+                    else if (inputCommand == "block") Console.WriteLine($"You blocked a {objectName} attack! Damage blocked : {damageObject}");
+                    else Console.WriteLine("Please write \"attack\" or \"block\"");
+                }
+            }
+            else if (words[0] == "attack" && words[1] != locObj.Name)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"There is no {words[1]} in this area.\r\nUse command \"attack <name object>\"");
+            }
             Console.ResetColor();
         }
     }

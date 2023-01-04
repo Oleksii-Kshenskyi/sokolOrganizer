@@ -1,5 +1,4 @@
-﻿namespace SokolTextGame
-{
+﻿namespace SokolTextGame{
     public interface ILocation
     {
         string Name { get; }
@@ -30,7 +29,7 @@
             "Blacksmiths who use their huge hammers to make weapons that every traveler can buy,\n" +
             "as long as he has coins in his pocket and not air.\n";
 
-        public string[] possibleLocation => new[] { "forest", "weapon shop"};
+        public string[] possibleLocation => new[] { "forest", "weapon shop", "cave" };
 
         public IObject? ObjectOnLocation { get; set; }
         public Square(IObject objectOnLocation)
@@ -52,5 +51,22 @@
 
         public IObject? ObjectOnLocation { get; set; }
         public WeaponShop(IObject? objectOnLocation) => ObjectOnLocation = objectOnLocation;
+    }
+    public class Cave : ILocation
+    {
+        public string Name => "cave";
+
+        public string Description => "A dark place that has one entrance and one exit.\n" +
+            "There are traces of dried blood on the walls.\n" +
+            "The deadly smell in the air makes it clear that not everyone who entered here\n" +
+            "could see the light of day again.\n";
+
+        public string[] possibleLocation => new[] { "square" };
+
+        public IObject? ObjectOnLocation { get; set; }
+        public Cave(IObject? objectOnLocation)
+        {
+            ObjectOnLocation = objectOnLocation;
+        }
     }
 }
