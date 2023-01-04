@@ -33,3 +33,15 @@ public class Shopkeeper : IObject
     public string[] LinesObjectSays => new[] {"Stop talking and buy something already!"};
     public string[] ItemsForSale { get; } = new[] { "axe", "sword", "staff" };
 }
+public class Monster : IObject
+{
+    public string Name => "monster";
+
+    public string Description => "A large shaggy beast, rather like a huge rock because of the color of its fur.\n" +
+        "Its body shows scars, most likely from travelers who sought shelter from the rain and found their doom\n" +
+        "because the beast lies on a pile of bones\n ";
+
+    public string[] LinesObjectSays => throw new NotImplementedException();
+
+    public string[] ItemsForSale => null;
+}

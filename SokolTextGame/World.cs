@@ -22,6 +22,7 @@
             locations["forest"] = new Forest(null);
             locations["square"] = new Square(new Guard());
             locations["weapon shop"] = new WeaponShop(new Shopkeeper());
+            locations["cave"] = new Cave(new Monster());
         }
         public ILocation CurrentLocation()
         {
