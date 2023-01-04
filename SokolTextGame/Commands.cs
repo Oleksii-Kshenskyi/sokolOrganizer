@@ -271,7 +271,7 @@
                         if (hpPlayer <= 0)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("You're dead.\nNext time pick a lighter opponent.\nThanks for playing.");
+                            Console.WriteLine("You're dead.\nNext time pick an easier opponent.\nThanks for playing.");
                             Console.ResetColor();
                             Environment.Exit(0);
                         }
